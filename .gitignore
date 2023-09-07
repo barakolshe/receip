@@ -1,0 +1,4 @@
+native/node_modules
+backend/node_modules
+interpreter/venv
+interpreter/__pycache__
