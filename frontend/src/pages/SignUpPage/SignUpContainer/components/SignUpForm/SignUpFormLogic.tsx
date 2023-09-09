@@ -15,6 +15,7 @@ const useSignUpFormLogic = () => {
     formState: { errors: formErrors },
     setError,
   } = useForm<SignUpFormTypes>();
+  const navigate = useNavigate();
 
   // email
   const { ref: emailInputRef, ...emailInputProps } = register("email", {
@@ -45,8 +46,6 @@ const useSignUpFormLogic = () => {
   };
 
   const onSubmit = ({ email, password }: SignUpFormTypes) => {
-    const navigate = useNavigate();
-
     console.log("creating user");
     createUserWithEmailAndPassword(auth, email, password)
       .then(async () => {
@@ -55,7 +54,7 @@ const useSignUpFormLogic = () => {
         // ...
       })
       .catch(() => {
-        setError("password", {
+        setError("email", {
           type: "EmailAlreadyExists",
           message: "The email provided already exists",
         });
