@@ -12,7 +12,7 @@ type LinkProps = Omit<MuiLinkProps, "variant"> & {
   variant?: VariantsTypes;
 };
 
-const Button: FunctionComponent<LinkProps> = ({ variant, ...props }) => {
+const Link: FunctionComponent<LinkProps> = ({ variant, ...props }) => {
   switch (variant) {
     case variants.primary:
       return <PrimaryLink {...props} />;
@@ -23,4 +23,4 @@ const Button: FunctionComponent<LinkProps> = ({ variant, ...props }) => {
   }
 };
 
-export default Button;
+export default Link;

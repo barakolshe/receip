@@ -1,13 +1,18 @@
 import { FunctionComponent, ReactNode } from "react";
-import theme from "./theme";
+import theme from "../theme";
 import { ThemeProvider } from "@mui/material";
+import AuthProvider from "./AuthProvider";
 
 interface ProvidersProps {
   children?: ReactNode;
 }
 
 const Providers: FunctionComponent<ProvidersProps> = ({ children }) => {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return (
+    <AuthProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </AuthProvider>
+  );
 };
 
 export default Providers;

@@ -1,11 +1,11 @@
 import BigLogoContainer from "@/components/containers/BigLogoContainer";
 import { Grid } from "@mui/material";
 import { FunctionComponent } from "react";
-import LoginContainer from "./components/LoginContainer/LoginContainer";
+import SignUpContainer from "./SignUpContainer/SignUpContainer";
 
-interface LoginPageProps {}
+interface SignUpPageProps {}
 
-const LoginPage: FunctionComponent<LoginPageProps> = () => {
+const SignUpPage: FunctionComponent<SignUpPageProps> = () => {
   return (
     <Grid container sx={{ minWidth: "100vw", minHeight: "100vh" }}>
       <Grid
@@ -18,7 +18,7 @@ const LoginPage: FunctionComponent<LoginPageProps> = () => {
           justifyContent: "center",
         }}
       >
-        <LoginContainer />
+        <SignUpContainer />
       </Grid>
       <Grid item xs={0} md={6} sx={{ display: { xs: "none", md: "block" } }}>
         <BigLogoContainer />
@@ -27,4 +27,4 @@ const LoginPage: FunctionComponent<LoginPageProps> = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;

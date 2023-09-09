@@ -13,7 +13,7 @@ const PrimaryLink: FunctionComponent<PrimaryLinkProps> = ({
   return (
     <Link
       variant="body2"
-      color="link.main"
+      color={theme.palette.link.main}
       underline="hover"
       sx={{
         cursor: "pointer",
