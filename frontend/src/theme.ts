@@ -26,6 +26,12 @@ const defaultColors = {
     primary: "#4A4543",
     secondary: "#808080",
   },
+  // default error colors
+  error: {
+    light: "ef5350",
+    main: "#d32f2f",
+    dark: "#c62828",
+  },
   input: {
     main: "placeholder",
   },
@@ -131,6 +137,9 @@ let theme = createTheme({
           ".MuiInputBase-root.Mui-focused > fieldset": {
             borderColor: defaultColors.text.primary,
           },
+          ".MuiInputBase-root.Mui-focused.Mui-error > fieldset": {
+            borderColor: defaultColors.error.main,
+          },
         },
       },
     },
@@ -139,12 +148,16 @@ let theme = createTheme({
         root: {
           position: "unset",
           transform: "unset",
+          marginBottom: "2px",
           textAlign: "left",
           color: defaultColors.text.primary,
           fontWeight: 500,
           fontSize: typography.body2.fontSize,
           "&.Mui-focused": {
             color: defaultColors.text.primary,
+          },
+          "&.Mui-focused.Mui-error": {
+            color: "error",
           },
         },
       },

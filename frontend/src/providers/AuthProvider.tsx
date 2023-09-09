@@ -1,11 +1,11 @@
+import { auth } from "@/configs/firebase.config";
+import { User } from "firebase/auth";
 import React, {
   FunctionComponent,
   ReactNode,
   useEffect,
   useState,
 } from "react";
-import { auth } from "@/configs/firebase.config";
-import { User } from "firebase/auth";
 
 export const AuthContext = React.createContext<User | "initial" | null>(null);
 
@@ -20,7 +20,6 @@ const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      console.log("updating", user);
       setCurrentUser(user);
     });
   }, []);
