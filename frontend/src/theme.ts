@@ -113,7 +113,8 @@ let theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         "#root": {
-          margin: "0 auto",
+          width: "100vw",
+          minHeight: "100vh",
         },
       },
     },

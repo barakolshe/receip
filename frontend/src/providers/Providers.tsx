@@ -1,6 +1,6 @@
+import { ThemeProvider } from "@mui/material";
 import { FunctionComponent, ReactNode } from "react";
 import theme from "../theme";
-import { ThemeProvider } from "@mui/material";
 import AuthProvider from "./AuthProvider";
 
 interface ProvidersProps {

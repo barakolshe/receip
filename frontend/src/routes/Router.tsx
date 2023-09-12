@@ -1,51 +1,52 @@
-import LoginLayout from "@/layouts/LoginLayout";
-import HomePage from "@/pages/Home/HomePage";
-import LoadingPage from "@/pages/LoadingPage";
-import LoginPage from "@/pages/LoginPage/LoginPage";
-import SignUpPage from "@/pages/SignUpPage/SignUpPage";
-import { AuthContext } from "@/providers/AuthProvider";
-import React, { FunctionComponent } from "react";
+import MainLayout from "@/layouts/MainLayout";
+import Error404Page from "@/pages/Error404Page";
+import GroupsPage from "@/pages/GroupsPage/GroupsPage";
+import { SignIn, SignUp, SignedIn, SignedOut } from "@clerk/clerk-react";
+import { FunctionComponent } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import ConditionalContent from "./ConditionalContent";
 
 interface RouterProps {}
 
 const Router: FunctionComponent<RouterProps> = () => {
-  const currentUser = React.useContext(AuthContext);
-  if (currentUser === "initial") {
-    return <LoadingPage />;
-  }
-  const isAuth = currentUser !== null;
-
-  console.log(isAuth);
-
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          element={
-            <ConditionalContent show={!isAuth}>
-              <LoginLayout />
-            </ConditionalContent>
-          }
-        >
-          <>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="*" element={<Navigate to="/login" replace />} />
-          </>
+          path="/sign-in"
+          element={<SignIn routing="path" path="/sign-in" />}
+        />
+        <Route
+          path="/sign-up"
+          element={<SignUp routing="path" path="/sign-up" />}
+        />
+        <Route element={<MainLayout />}>
+          <Route
+            path="/groups"
+            element={
+              <>
+                <SignedIn>
+                  <GroupsPage />
+                </SignedIn>
+                <SignedOut>
+                  <Navigate to="/login" />
+                </SignedOut>
+              </>
+            }
+          />
         </Route>
         <Route
+          path="/*"
           element={
-            <ConditionalContent show={isAuth}>
-              <LoginLayout />
-            </ConditionalContent>
+            <>
+              <SignedIn>
+                <Error404Page />
+              </SignedIn>
+              <SignedOut>
+                <Navigate to="/sign-in" />
+              </SignedOut>
+            </>
           }
-        >
-          <>
-            <Route path="/home" element={<HomePage />} />
-          </>
-        </Route>
+        />
       </Routes>
     </BrowserRouter>
   );

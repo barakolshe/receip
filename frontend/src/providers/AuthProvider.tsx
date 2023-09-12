@@ -1,31 +1,22 @@
-import { auth } from "@/configs/firebase.config";
-import { User } from "firebase/auth";
-import React, {
-  FunctionComponent,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import { ClerkProvider } from "@clerk/clerk-react";
+import { FunctionComponent, ReactNode } from "react";
 
-export const AuthContext = React.createContext<User | "initial" | null>(null);
+const VITE_CLERK_PUBLISHABLE_KEY: string = import.meta.env
+  .VITE_CLERK_PUBLISHABLE_KEY;
 
-interface AuthProviderProps {
+if (!VITE_CLERK_PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key");
+}
+const clerkPubKey = VITE_CLERK_PUBLISHABLE_KEY;
+interface ProvidersProps {
   children?: ReactNode;
 }
 
-const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<User | "initial" | null>(
-    "initial"
-  );
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-    });
-  }, []);
-
+const AuthProvider: FunctionComponent<ProvidersProps> = ({ children }) => {
   return (
-    <AuthContext.Provider value={currentUser}>{children}</AuthContext.Provider>
+    <ClerkProvider publishableKey={clerkPubKey} appearance={{}}>
+      {children}
+    </ClerkProvider>
   );
 };
 
